@@ -29,7 +29,7 @@ module ONVIF
                         step4 = true if topic_namespace.include? "http://"
                         #ONVIF::Client.log xml_doc.xpath('//wstop:TopicSet').size
                         #step5 = true unless xml_doc.xpath('//wstop:TopicSet').size.empty?
-                        [step1, step2, step3, step4, step5].each{|e| ONVIF::Client.log e]
+                        [step1, step2, step3, step4, step5].each{|e| ONVIF::Client.log e}
                         if step1 and step2 and step3 and step4# and step5
                             callback cb, success, result
                         else
