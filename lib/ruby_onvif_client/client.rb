@@ -1,9 +1,13 @@
 require "em-http"
+require 'log_switch'
 require "nokogiri"
 require "nori"
 
 module ONVIF
     class Client
+        extend LogSwitch
+        self.logger.datetime_format = "%Y-%m-%d %H:%M:%S "
+
         def initialize options
             @options = {
                 connect_timeout: 5,
@@ -11,7 +15,8 @@ module ONVIF
         end
 
         def send data
-            puts "send data to #{@options} ", data 
+            ONVIF::Client.log "send data to #{@options} "
+            ONVIF::Client.log data
             http_options = {
                 connect_timeout: @options[:connect_timeout]
             }
@@ -19,14 +24,15 @@ module ONVIF
                 body: data
             }
             http = EventMachine::HttpRequest.new(
-                @options[:address], 
+                @options[:address],
                 http_options
             ).post(request_options)
             http.errback { yield false, {} }
             http.callback do
-                puts "========================="
-                puts "receive message =>", http.response
-                puts "========================="
+                ONVIF::Client.log "========================="
+                ONVIF::Client.log "receive message =>"
+                ONVIF::Client.log http.response
+                ONVIF::Client.log "========================="
                 if http.response_header.status != 200
                     yield false, {header: http.response_header}
                 else
@@ -41,4 +47,3 @@ module ONVIF
         end
     end
 end
-

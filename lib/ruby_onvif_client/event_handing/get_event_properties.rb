@@ -22,14 +22,14 @@ module ONVIF
                                 step1 = true
                             elsif node.content == 'http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet'
                                 step2 = true
-                            end    
+                            end
                         end
                         step3 = true if xml_doc.xpath('//tev:MessageContentFilterDialect').first.content == 'http://www.onvif.org/ver10/tev/messageContentFilter/ItemFilter'
                         topic_namespace = xml_doc.xpath('//tev:TopicNamespaceLocation').first.content
                         step4 = true if topic_namespace.include? "http://"
-                        #puts xml_doc.xpath('//wstop:TopicSet').size
+                        #ONVIF::Client.log xml_doc.xpath('//wstop:TopicSet').size
                         #step5 = true unless xml_doc.xpath('//wstop:TopicSet').size.empty?
-                        puts step1, step2, step3, step4, step5
+                        [step1, step2, step3, step4, step5].each{|e| ONVIF::Client.log e]
                         if step1 and step2 and step3 and step4# and step5
                             callback cb, success, result
                         else
@@ -43,4 +43,3 @@ module ONVIF
         end
     end
 end
-

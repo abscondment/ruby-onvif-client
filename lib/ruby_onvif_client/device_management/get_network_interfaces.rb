@@ -65,7 +65,7 @@ module ONVIF
             end
 
             def _get_ipv_four xml_ipv_four
-                puts xml_ipv_four
+                ONVIF::Client.log xml_ipv_four
                 ipv_four = {enabled: value(xml_ipv_four, 'tt:Enabled')}
                 manual = []; config = {}
                 link_local = xml_ipv_four.xpath('tt:Config/tt:LinkLocal')

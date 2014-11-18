@@ -9,23 +9,23 @@ def get_event_service_address ipaddress, cb
     content = [{:Category => 'Events'}]
     device_management.get_capabilities content, ->(success, result) {
         if success
-            puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%success%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-            #puts result
+            ONVIF::Client.log "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%success%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+            #ONVIF::Client.log result
             @res[:address] = result[:events][:x_addr]
             @res[:subscription_policy_support] = result[:events][:wssubscription_policy_support]
             @res[:pull_point_support] = result[:events][:wspull_point_support]
             @res[:pausable_subscription_manager_interface_support] = result[:events][:wspsmis]
-            #puts @res
+            #ONVIF::Client.log @res
             cb.call  @res[:address]
         end
     }
 end
 
-module ONVIF   
+module ONVIF
     class Event < Service
       # def initialize(args)
-        
-      # end        
+
+      # end
     end
 end
 

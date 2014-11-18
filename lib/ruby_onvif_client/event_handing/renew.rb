@@ -16,7 +16,8 @@ module ONVIF
                         res = {}
                         current_time = xml_doc.xpath('//wsnt:CurrentTime').first.content
                         termination_time = xml_doc.xpath('//wsnt:TerminationTime').first.content
-                        puts current_time, termination_time
+                        ONVIF::Client.log current_time
+                        ONVIF::Client.log termination_time
                         res[:current_time] = current_time
                         res[:termination_time] = termination_time
                         callback cb, success, res
@@ -28,4 +29,3 @@ module ONVIF
         end
     end
 end
-

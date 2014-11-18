@@ -19,13 +19,14 @@ module ONVIF
                         addresses = []
                         xml_doc.xpath('//tev:SubscriptionReference').each do |node|
                             addresses << value(node, 'wsa5:Address')
-                        end                        
+                        end
                         res = {}
-                        puts addresses
+                        ONVIF::Client.log addresses
                         res[:addresses] = addresses
                         current_time = xml_doc.xpath('//wsnt:CurrentTime').first.content
                         termination_time = xml_doc.xpath('//wsnt:TerminationTime').first.content
-                        puts current_time, termination_time
+                        ONVIF::Client.log current_time
+                        ONVIF::Client.log termination_time
                         res[:current_time] = current_time
                         res[:termination_time] = termination_time
                         callback cb, success, res

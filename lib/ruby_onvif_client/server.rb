@@ -12,35 +12,35 @@ module ONVIF
       end
 
       def process_http_request
-          puts "############################ #{__LINE__}"
-          puts  @http_request_method
-          puts "############################ #{__LINE__}"
-          puts  @http_request_uri
-          puts "############################ #{__LINE__}"
-          puts  @http_query_string
-          puts "############################ #{__LINE__}"
-          puts  @http_protocol
-          puts "############################ #{__LINE__}"
-          puts  @http_content
-          puts "############################ #{__LINE__}"
-          puts  @http[:cookie]
-          puts "############################ #{__LINE__}"
-          puts  @http[:content_type]
-          puts "############################ #{__LINE__}"
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http_request_method
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http_request_uri
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http_query_string
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http_protocol
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http_content
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http[:cookie]
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log  @http[:content_type]
+          ONVIF::Client.log "############################ #{__LINE__}"
           # you have all the http headers in this hash
-          puts  @http.inspect
-          puts "############################ #{__LINE__}"
-          puts @http_if_none_match
-          puts "############################ #{__LINE__}"
-          puts @http_path_info
-          puts "############################ #{__LINE__}"
-          puts @http_if_none_match
-          puts "############################ #{__LINE__}"
-          puts @http_post_content
-          puts "############################ #{__LINE__}"
-          puts @http_headers
-          puts "############################ #{__LINE__}"
-          puts @http_bodys
+          ONVIF::Client.log  @http.inspect
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_if_none_match
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_path_info
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_if_none_match
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_post_content
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_headers
+          ONVIF::Client.log "############################ #{__LINE__}"
+          ONVIF::Client.log @http_bodys
 
           result = parse_data @http_content
           # response = EM::DelegatedHttpResponse.new(self)
@@ -53,7 +53,7 @@ module ONVIF
 
       def http_request_errback e
           # printing the whole exception
-          puts e.inspect
+          ONVIF::Client.log e.inspect
       end
 
       def parse_data data
@@ -74,10 +74,10 @@ module ONVIF
           end
           res[:data] = event_data
           res[:host] = @http[:host] + @http_request_uri
-          puts res
-          # {:topic=>"tns1:VideoAnalytics/tnsn:MotionDetection", 
-          #  :time=>"2013-08-01T17:01:33", 
-          #  :source=>{:name=>"VideoSourceConfigurationToken", :value=>"profile_VideoSource_1"}, 
+          ONVIF::Client.log res
+          # {:topic=>"tns1:VideoAnalytics/tnsn:MotionDetection",
+          #  :time=>"2013-08-01T17:01:33",
+          #  :source=>{:name=>"VideoSourceConfigurationToken", :value=>"profile_VideoSource_1"},
           #  :data=>{:name=>"MotionActive", :value=>"true"}, :host=>"192.168.16.251:8080/onvif_notify_server"}
           res
       end
