@@ -46,8 +46,7 @@ module ONVIF
                 message = create_media_onvif_message  namespaces: {:'xmlns:sch' => 'http://www.onvif.org/ver10/schema'}
                 message.body =  ->(xml) do
                     xml.wsdl(:SetVideoEncoderConfiguration) do
-                        xml.wsdl :Configuration, {"token" => configuration[:configuration][:token]}
-                        xml.wsdl(:Configuration) do 
+                        xml.wsdl :Configuration, {"token" => configuration[:configuration][:token]} do
                             xml.sch :Name, configuration[:configuration][:name]
                             xml.sch :UseCount, configuration[:configuration][:use_count]
                             xml.sch :Encoding, configuration[:configuration][:encoding]
