@@ -4,7 +4,7 @@ module ONVIF
     module MediaAction
         class GetVideoEncoderConfigurations < Action
             def run cb
-                message = Message.new
+                message = create_media_onvif_message
                 message.body = ->(xml) do
                     xml.wsdl(:GetVideoEncoderConfigurations)
                 end
@@ -51,7 +51,7 @@ module ONVIF
                     end
                 end
             end
-            
+
             def _get_node parent_node, node_name
                 parent_node.at_xpath(node_name)
             end
